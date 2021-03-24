@@ -47,21 +47,20 @@
   </parent>
 
   <properties>
-    <codegen.skipIfSpecIsUnchanged>true</codegen.skipIfSpecIsUnchanged>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <codegen.skipIfSpecIsUnchanged>false</codegen.skipIfSpecIsUnchanged>
     <openapi.generator.maven.plugin.generateApiDocumentation>false
     </openapi.generator.maven.plugin.generateApiDocumentation>
     <openapi.generator.maven.plugin.generateApiTests>false
     </openapi.generator.maven.plugin.generateApiTests>
-    <openapi.generator.maven.plugin.generateApis>false</openapi.generator.maven.plugin.generateApis>
+    <openapi.generator.maven.plugin.generateApis>true</openapi.generator.maven.plugin.generateApis>
     <openapi.generator.maven.plugin.generateModelDocumentation>false
     </openapi.generator.maven.plugin.generateModelDocumentation>
     <openapi.generator.maven.plugin.generateModelTests>false
     </openapi.generator.maven.plugin.generateModelTests>
-    <openapi.generator.maven.plugin.generateSupportingFiles>false
-    </openapi.generator.maven.plugin.generateSupportingFiles>
-
+    <openapi.generator.maven.plugin.supportingFilesToGenerate>ApiUtil.java
+    </openapi.generator.maven.plugin.supportingFilesToGenerate>
   </properties>
 
 </project>

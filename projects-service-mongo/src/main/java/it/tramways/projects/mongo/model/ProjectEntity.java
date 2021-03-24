@@ -1,33 +1,33 @@
 package it.tramways.projects.mongo.model;
 
-public class ProjectEntity {
+import it.tramways.projects.api.model.Project;
+import it.tramways.projects.api.model.ProjectDescription;
 
-    private String owner;
-    private String uuid;
-    private String name;
+public class ProjectEntity extends Project {
 
-    public void setOwner(String userUuid) {
-        this.owner = userUuid;
+    private String id;
+
+    public static ProjectEntity from(ProjectDescription project) {
+        ProjectEntity result = new ProjectEntity();
+        result.setUuid(project.getUuid());
+        result.setName(project.getName());
+        result.setOwner(project.getOwner());
+        return result;
     }
 
-    public String getOwner() {
-        return owner;
+    public static ProjectEntity from(Project project) {
+        ProjectEntity result = new ProjectEntity();
+        result.setUuid(project.getUuid());
+        result.setName(project.getName());
+        result.setOwner(project.getOwner());
+        return result;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

@@ -211,6 +211,8 @@ components:
     RoadMap:
       type: object
       properties:
+        name:
+          type: string
         points:
           type: array
           items:
@@ -284,10 +286,6 @@ components:
           type: string
         owner:
           type: string
-        roadMaps:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoadMapDescription'
     RoadMapDescription:
       type: object
       properties:
