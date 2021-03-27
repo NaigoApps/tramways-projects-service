@@ -211,6 +211,8 @@ components:
     RoadMap:
       type: object
       properties:
+        uuid:
+          type: string
         name:
           type: string
         points:
