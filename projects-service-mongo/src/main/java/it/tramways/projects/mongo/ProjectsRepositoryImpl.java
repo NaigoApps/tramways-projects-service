@@ -3,7 +3,9 @@ package it.tramways.projects.mongo;
 import it.tramways.projects.api.ProjectsRepository;
 import it.tramways.projects.api.model.Project;
 import it.tramways.projects.api.model.ProjectDescription;
+import it.tramways.projects.api.model.RoadMap;
 import it.tramways.projects.mongo.model.ProjectEntity;
+import it.tramways.projects.mongo.model.RoadMapEntity;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,11 +16,11 @@ import org.springframework.stereotype.Repository;
 public class ProjectsRepositoryImpl implements ProjectsRepository {
 
     private final ProjectsMongoRepository projectsDelegate;
-    private final ProjectsMongoRepository roadmapsDelegate;
+    private final RoadMapsMongoRepository roadmapsDelegate;
 
     public ProjectsRepositoryImpl(
         ProjectsMongoRepository projectsDelegate,
-        ProjectsMongoRepository roadmapsDelegate
+        RoadMapsMongoRepository roadmapsDelegate
     ) {
         this.projectsDelegate = projectsDelegate;
         this.roadmapsDelegate = roadmapsDelegate;
@@ -26,7 +28,7 @@ public class ProjectsRepositoryImpl implements ProjectsRepository {
 
     @Override
     public List<ProjectDescription> findProjects(String userUuid) {
-        return projectsDelegate.findAll(withOwner(userUuid)).stream()
+        return projectsDelegate.findAll(projectWithOwner(userUuid)).stream()
             .map(this::convertProject).collect(
                 Collectors.toList());
     }
@@ -41,7 +43,7 @@ public class ProjectsRepositoryImpl implements ProjectsRepository {
 
     @Override
     public Project findProject(String uuid) {
-        ProjectEntity entity = projectsDelegate.findOne(withUuid(uuid)).orElse(null);
+        ProjectEntity entity = projectsDelegate.findOne(projectWithUuid(uuid)).orElse(null);
         if (entity == null) {
             return null;
         }
@@ -49,8 +51,15 @@ public class ProjectsRepositoryImpl implements ProjectsRepository {
         result.setUuid(entity.getUuid());
         result.setOwner(entity.getOwner());
         result.setName(entity.getName());
-        result.setRoadMaps(entity.getRoadMaps());
+        result.setRoadMaps(roadmapsDelegate.findAll(withProjectId(entity.getUuid())).stream()
+            .map(RoadMapEntity::toDescription).collect(Collectors.toList()));
         return result;
+    }
+
+    private Example<RoadMapEntity> withProjectId(String projectUuid) {
+        RoadMapEntity probe = new RoadMapEntity();
+        probe.setProjectId(projectUuid);
+        return Example.of(probe);
     }
 
     @Override
@@ -60,7 +69,8 @@ public class ProjectsRepositoryImpl implements ProjectsRepository {
 
     @Override
     public Project updateProject(Project project) {
-        Optional<ProjectEntity> optTarget = projectsDelegate.findOne(withUuid(project.getUuid()));
+        Optional<ProjectEntity> optTarget = projectsDelegate
+            .findOne(projectWithUuid(project.getUuid()));
         if (optTarget.isPresent()) {
             ProjectEntity target = optTarget.get();
             ProjectEntity from = ProjectEntity.from(project);
@@ -72,17 +82,38 @@ public class ProjectsRepositoryImpl implements ProjectsRepository {
 
     @Override
     public void deleteProject(String uuid) {
-        projectsDelegate.findOne(withUuid(uuid)).ifPresent(projectsDelegate::delete);
+        projectsDelegate.findOne(projectWithUuid(uuid)).ifPresent(projectsDelegate::delete);
     }
 
-    private Example<ProjectEntity> withOwner(String userUuid) {
+    @Override
+    public RoadMap createMap(RoadMap map) {
+        return roadmapsDelegate.insert(RoadMapEntity.from(map));
+    }
+
+    @Override
+    public void deleteMap(String mapId) {
+        roadmapsDelegate.findOne(mapWithUuid(mapId)).ifPresent(roadmapsDelegate::delete);
+    }
+
+    @Override
+    public RoadMap findMap(String mapId) {
+        return roadmapsDelegate.findOne(mapWithUuid(mapId)).orElse(null);
+    }
+
+    private Example<ProjectEntity> projectWithOwner(String userUuid) {
         ProjectEntity probe = new ProjectEntity();
         probe.setOwner(userUuid);
         return Example.of(probe);
     }
 
-    private Example<ProjectEntity> withUuid(String uuid) {
+    private Example<ProjectEntity> projectWithUuid(String uuid) {
         ProjectEntity probe = new ProjectEntity();
+        probe.setUuid(uuid);
+        return Example.of(probe);
+    }
+
+    private Example<RoadMapEntity> mapWithUuid(String uuid) {
+        RoadMapEntity probe = new RoadMapEntity();
         probe.setUuid(uuid);
         return Example.of(probe);
     }

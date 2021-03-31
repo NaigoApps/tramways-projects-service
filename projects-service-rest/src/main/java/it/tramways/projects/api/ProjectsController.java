@@ -2,11 +2,13 @@ package it.tramways.projects.api;
 
 import it.tramways.commons.web.security.LoggedUserService;
 import it.tramways.commons.web.security.TramwaysUserDetails;
+import it.tramways.projects.api.model.CreateMapRequest;
 import it.tramways.projects.api.model.CreateProjectRequest;
 import it.tramways.projects.api.model.Project;
 import it.tramways.projects.api.model.ProjectDescription;
+import it.tramways.projects.api.model.RoadMap;
+import it.tramways.projects.api.model.UpdateMapRequest;
 import it.tramways.projects.api.model.UpdateProjectRequest;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -52,7 +54,7 @@ public class ProjectsController implements ProjectsApi {
             project.setOwner(user.getUuid());
             projectsRepository.createProject(project);
             return ResponseEntity.ok().build();
-        }, () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+        });
     }
 
     @Override
@@ -66,7 +68,7 @@ public class ProjectsController implements ProjectsApi {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
             return ResponseEntity.ok(project);
-        }, () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null));
+        });
     }
 
     @Override
@@ -83,7 +85,7 @@ public class ProjectsController implements ProjectsApi {
             oldProject.setName(updateProjectRequest.getName());
             projectsRepository.updateProject(oldProject);
             return ResponseEntity.ok().build();
-        }, () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+        });
     }
 
     @Override
@@ -99,7 +101,60 @@ public class ProjectsController implements ProjectsApi {
             projectsRepository.deleteProject(id);
             return ResponseEntity.ok().build();
 
-        }, () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+        });
+    }
+
+    @Override
+    public ResponseEntity<RoadMap> createMap(String projectId,
+        @Valid CreateMapRequest createMapRequest) {
+        return withLoggedUser(user -> {
+            Project project = projectsRepository.findProject(projectId);
+            if (!project.getOwner().equals(user.getUuid())) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            RoadMap map = createMapRequest.getMap();
+            map.setUuid(UUID.randomUUID().toString());
+            map.setProjectId(projectId);
+            return ResponseEntity.ok(projectsRepository.createMap(map));
+        });
+    }
+
+    @Override
+    public ResponseEntity<RoadMap> getMap(String projectId, String mapId) {
+        return withLoggedUser(user -> {
+            Project project = projectsRepository.findProject(projectId);
+            if (!project.getOwner().equals(user.getUuid())) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            return ResponseEntity.ok(projectsRepository.findMap(mapId));
+        });
+    }
+
+    @Override
+    public ResponseEntity<Void> updateMap(String projectId, String mapId,
+        @Valid UpdateMapRequest updateMapRequest) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteMap(String projectId, String mapId) {
+        return withLoggedUser(user -> {
+            Project project = projectsRepository.findProject(projectId);
+            if (!project.getOwner().equals(user.getUuid())) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            if (project.getRoadMaps().stream().noneMatch(map -> map.getUuid().equals(mapId))) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+            projectsRepository.deleteMap(mapId);
+            return ResponseEntity.ok().build();
+        });
+    }
+
+
+    private <T> ResponseEntity<T> withLoggedUser(
+        Function<TramwaysUserDetails, ResponseEntity<T>> action) {
+        return withLoggedUser(action, unauthorizedSupplier());
     }
 
     private <T> ResponseEntity<T> withLoggedUser(
@@ -110,5 +165,9 @@ public class ProjectsController implements ProjectsApi {
             return errorSupplier.get();
         }
         return action.apply(userDetails);
+    }
+
+    private <T> Supplier<ResponseEntity<T>> unauthorizedSupplier() {
+        return () -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }

@@ -1,35 +1,35 @@
 package it.tramways.projects.mongo.model;
 
-import java.util.List;
+import it.tramways.projects.api.model.RoadMap;
+import it.tramways.projects.api.model.RoadMapDescription;
 
-public class RoadMapEntity {
+public class RoadMapEntity extends RoadMap {
 
-  private List<RelevantPoint> points;
-  private List<Lane> lanes;
-  private String name;
+    private String id;
 
-  public List<Lane> getLanes() {
-    return lanes;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public void setLanes(List<Lane> lanes) {
-    this.lanes = lanes;
-  }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-  public List<RelevantPoint> getPoints() {
-    return points;
-  }
+    public static RoadMapEntity from(RoadMap roadMap) {
+        RoadMapEntity entity = new RoadMapEntity();
+        entity.setUuid(roadMap.getUuid());
+        entity.setProjectId(roadMap.getProjectId());
+        entity.setName(roadMap.getName());
+        entity.setLanes(roadMap.getLanes());
+        entity.setPoints(roadMap.getPoints());
+        return entity;
+    }
 
-  public void setPoints(List<RelevantPoint> points) {
-    this.points = points;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
+    public RoadMapDescription toDescription() {
+        RoadMapDescription description = new RoadMapDescription();
+        description.setUuid(getUuid());
+        description.setName(getName());
+        return description;
+    }
 }
 
