@@ -283,6 +283,19 @@ components:
           type: string
         name:
           type: string
+    ItemConfiguration:
+      type: object
+      properties:
+        uuid:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        props:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'
     Property:
       type: object
       discriminator:

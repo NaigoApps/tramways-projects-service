@@ -100,6 +100,16 @@ public class ProjectsRepositoryImpl implements ProjectsRepository {
         return roadmapsDelegate.findOne(mapWithUuid(mapId)).orElse(null);
     }
 
+    @Override
+    public void updateMap(String mapId, RoadMap map) {
+        RoadMapEntity entity = roadmapsDelegate.findOne(mapWithUuid(mapId)).orElse(null);
+        if (entity != null) {
+            entity.setPoints(map.getPoints());
+            entity.setLanes(map.getLanes());
+            roadmapsDelegate.save(entity);
+        }
+    }
+
     private Example<ProjectEntity> projectWithOwner(String userUuid) {
         ProjectEntity probe = new ProjectEntity();
         probe.setOwner(userUuid);

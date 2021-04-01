@@ -133,7 +133,17 @@ public class ProjectsController implements ProjectsApi {
     @Override
     public ResponseEntity<Void> updateMap(String projectId, String mapId,
         @Valid UpdateMapRequest updateMapRequest) {
-        return null;
+        return withLoggedUser(user -> {
+            Project project = projectsRepository.findProject(projectId);
+            if (!project.getOwner().equals(user.getUuid())) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            if (project.getRoadMaps().stream().noneMatch(map -> map.getUuid().equals(mapId))) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+            projectsRepository.updateMap(mapId, updateMapRequest.getMap());
+            return ResponseEntity.ok().build();
+        });
     }
 
     @Override

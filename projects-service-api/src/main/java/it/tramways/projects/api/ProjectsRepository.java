@@ -22,4 +22,6 @@ public interface ProjectsRepository {
     void deleteMap(String mapId);
 
     RoadMap findMap(String mapId);
+
+    void updateMap(String mapId, RoadMap map);
 }
