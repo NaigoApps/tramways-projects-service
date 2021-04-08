@@ -32,7 +32,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="projects-service-api" />
+    <orderEntry type="library" name="Maven: it.tramways:projects-service-api:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: it.tramways:tramways-commons-web:1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="projects-service-mongo" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-mongodb:2.3.3.RELEASE" level="project" />

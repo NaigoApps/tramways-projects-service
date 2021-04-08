@@ -32,6 +32,10 @@
 
   <dependencies>
     <dependency>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
       <artifactId>tramways-commons-web</artifactId>
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
@@ -41,15 +45,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>projects-service</artifactId>
-    <groupId>it.tramways</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath/>
+    <version>2.3.3.RELEASE</version>
   </parent>
 
   <properties>
+    <codegen.skipIfSpecIsUnchanged>false</codegen.skipIfSpecIsUnchanged>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <codegen.skipIfSpecIsUnchanged>false</codegen.skipIfSpecIsUnchanged>
     <openapi.generator.maven.plugin.generateApiDocumentation>false
     </openapi.generator.maven.plugin.generateApiDocumentation>
     <openapi.generator.maven.plugin.generateApiTests>false
