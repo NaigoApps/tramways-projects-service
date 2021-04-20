@@ -11,9 +11,6 @@
           <execution>
             <configuration>
               <apiPackage>it.tramways.projects.api</apiPackage>
-              <configOptions>
-                <interfaceOnly>true</interfaceOnly>
-              </configOptions>
               <generatorName>spring</generatorName>
               <inputSpec>${project.basedir}/src/main/resources/api/projects-api.yaml</inputSpec>
               <modelPackage>it.tramways.projects.api.model</modelPackage>
@@ -36,7 +33,7 @@
       <groupId>org.springframework.boot</groupId>
     </dependency>
     <dependency>
-      <artifactId>tramways-commons-web</artifactId>
+      <artifactId>tramways-commons-rest</artifactId>
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
