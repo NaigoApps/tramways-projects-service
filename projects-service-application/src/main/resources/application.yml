@@ -1,16 +1,11 @@
 server:
   port: 0
-
 spring:
   application:
     name: projects-service
   data:
     mongodb:
       database: tramways_projects
-#  datasource:
-#    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/tramways_users?useLegacyDatetimeCode=false&serverTimezone=Europe/Rome
-#    username: tramways
-#    password: tramways
 
 eureka:
   instance:
