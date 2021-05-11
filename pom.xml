@@ -7,10 +7,13 @@
   <groupId>it.tramways</groupId>
   <modelVersion>4.0.0</modelVersion>
   <modules>
-    <module>projects-service-rest</module>
-    <module>projects-service-mongo</module>
+    <module>projects-service-inbound-rest</module>
+    <module>projects-service-outbound-mongo</module>
     <module>projects-service-application</module>
-    <module>projects-service-api</module>
+    <module>projects-service-outbound-api</module>
+    <module>projects-service-rest-api</module>
+    <module>api/v1/generated/java</module>
+    <module>api/v1/generated/spring</module>
   </modules>
   <packaging>pom</packaging>
   <parent>

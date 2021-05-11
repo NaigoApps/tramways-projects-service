@@ -1,0 +1,497 @@
+openapi: 3.0.3
+info:
+  description: Tramways Roadmaps API
+  title: Tramways Roadmaps API
+  version: 1.0.0
+servers:
+- url: http://localhost:8762/tramways/rest/
+security:
+- bearerAuth: []
+paths:
+  /projects:
+    get:
+      operationId: getProjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProjectDescription'
+                type: array
+          description: Ok
+      summary: Gets user projects
+      tags:
+      - projects
+      x-accepts: application/json
+    post:
+      operationId: createProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        "200":
+          description: Ok
+      summary: Creates a new project
+      tags:
+      - projects
+      x-contentType: application/json
+      x-accepts: application/json
+  /projects/{id}:
+    delete:
+      operationId: deleteProject
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Ok
+      summary: Deletes a project
+      tags:
+      - projects
+      x-accepts: application/json
+    get:
+      operationId: getProject
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Ok
+      summary: Gets project
+      tags:
+      - projects
+      x-accepts: application/json
+    put:
+      operationId: updateProject
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+      responses:
+        "200":
+          description: Ok
+      summary: Updates a project
+      tags:
+      - projects
+      x-contentType: application/json
+      x-accepts: application/json
+  /projects/{projectId}/maps:
+    post:
+      operationId: createMap
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMapRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadMap'
+          description: Ok
+      summary: Creates a map
+      tags:
+      - projects
+      x-contentType: application/json
+      x-accepts: application/json
+  /projects/{projectId}/maps/{mapId}:
+    delete:
+      operationId: deleteMap
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Ok
+      summary: Deletes a map
+      tags:
+      - projects
+      x-accepts: application/json
+    get:
+      operationId: getMap
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadMap'
+          description: Ok
+      summary: Gets a map
+      tags:
+      - projects
+      x-accepts: application/json
+    put:
+      operationId: updateMap
+      parameters:
+      - explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: mapId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMapRequest'
+      responses:
+        "200":
+          description: Ok
+      summary: Updates a map
+      tags:
+      - projects
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    CreateProjectRequest:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      type: object
+    UpdateProjectRequest:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      type: object
+    CreateMapRequest:
+      example:
+        map:
+          name: name
+          lanes:
+          - null
+          - null
+          uuid: uuid
+          projectId: projectId
+          points:
+          - null
+          - null
+      properties:
+        map:
+          $ref: '#/components/schemas/RoadMap'
+      type: object
+    UpdateMapRequest:
+      example:
+        map:
+          name: name
+          lanes:
+          - null
+          - null
+          uuid: uuid
+          projectId: projectId
+          points:
+          - null
+          - null
+      properties:
+        map:
+          $ref: '#/components/schemas/RoadMap'
+      type: object
+    Project:
+      example:
+        owner: owner
+        roadMaps:
+        - name: name
+          uuid: uuid
+        - name: name
+          uuid: uuid
+        name: name
+        uuid: uuid
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        roadMaps:
+          items:
+            $ref: '#/components/schemas/RoadMapDescription'
+          type: array
+      type: object
+    RoadMap:
+      example:
+        name: name
+        lanes:
+        - null
+        - null
+        uuid: uuid
+        projectId: projectId
+        points:
+        - null
+        - null
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        projectId:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/RelevantPoint'
+          type: array
+        lanes:
+          items:
+            $ref: '#/components/schemas/Lane'
+          type: array
+      type: object
+    RelevantPoint:
+      allOf:
+      - $ref: '#/components/schemas/Configurable'
+      - $ref: '#/components/schemas/RelevantPoint_allOf'
+    Lane:
+      allOf:
+      - $ref: '#/components/schemas/Configurable'
+      - $ref: '#/components/schemas/Lane_allOf'
+    CrossingLink:
+      allOf:
+      - $ref: '#/components/schemas/Configurable'
+      - $ref: '#/components/schemas/Lane_allOf'
+    Configurable:
+      discriminator:
+        propertyName: configurableType
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+        configurableType:
+          type: string
+        props:
+          items:
+            $ref: '#/components/schemas/Property'
+          type: array
+      type: object
+    ProjectDescription:
+      example:
+        owner: owner
+        name: name
+        uuid: uuid
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+      type: object
+    RoadMapDescription:
+      example:
+        name: name
+        uuid: uuid
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+      type: object
+    ItemConfiguration:
+      properties:
+        uuid:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        props:
+          items:
+            $ref: '#/components/schemas/Property'
+          type: array
+      type: object
+    Property:
+      discriminator:
+        propertyName: propertyType
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        propertyType:
+          type: string
+        valid:
+          type: boolean
+      required:
+      - propertyType
+      type: object
+    IntegerProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/IntegerProperty_allOf'
+    StringProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/StringProperty_allOf'
+    ChoiceProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/ChoiceProperty_allOf'
+    ChoiceElement:
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+      type: object
+    DecimalProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/DecimalProperty_allOf'
+    DistributionProperty:
+      allOf:
+      - $ref: '#/components/schemas/Property'
+      - $ref: '#/components/schemas/DistributionProperty_allOf'
+    Distribution:
+      discriminator:
+        mapping:
+          UNIFORM: '#/components/schemas/UniformDistribution'
+          EXPONENTIAL: '#/components/schemas/ExponentialDistribution'
+        propertyName: distributionType
+      properties:
+        distributionType:
+          type: string
+      required:
+      - distributionType
+      type: object
+    UniformDistribution:
+      allOf:
+      - $ref: '#/components/schemas/Distribution'
+      - $ref: '#/components/schemas/UniformDistribution_allOf'
+    ExponentialDistribution:
+      allOf:
+      - $ref: '#/components/schemas/Distribution'
+      - $ref: '#/components/schemas/ExponentialDistribution_allOf'
+    RelevantPoint_allOf:
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/CrossingLink'
+          type: array
+      type: object
+    Lane_allOf:
+      properties:
+        sourceId:
+          type: string
+        destinationId:
+          type: string
+      type: object
+    IntegerProperty_allOf:
+      properties:
+        value:
+          type: integer
+      type: object
+    StringProperty_allOf:
+      properties:
+        value:
+          type: string
+      type: object
+    ChoiceProperty_allOf:
+      properties:
+        choices:
+          items:
+            $ref: '#/components/schemas/ChoiceElement'
+          type: array
+        value:
+          type: string
+      type: object
+    DecimalProperty_allOf:
+      properties:
+        value:
+          type: number
+      type: object
+    DistributionProperty_allOf:
+      properties:
+        value:
+          $ref: '#/components/schemas/Distribution'
+      type: object
+    UniformDistribution_allOf:
+      properties:
+        left:
+          type: number
+        right:
+          type: number
+      type: object
+    ExponentialDistribution_allOf:
+      properties:
+        lambda:
+          type: number
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+
