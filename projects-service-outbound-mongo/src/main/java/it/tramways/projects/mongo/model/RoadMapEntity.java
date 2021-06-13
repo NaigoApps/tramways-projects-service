@@ -1,7 +1,7 @@
 package it.tramways.projects.mongo.model;
 
-import it.tramways.projects.api.model.RoadMap;
-import it.tramways.projects.api.model.RoadMapDescription;
+import it.tramways.projects.api.v1.spring.server.model.RoadMap;
+import it.tramways.projects.api.v1.spring.server.model.RoadMapDescription;
 
 public class RoadMapEntity extends RoadMap {
 

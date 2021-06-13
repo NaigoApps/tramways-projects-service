@@ -1,6 +1,5 @@
 package it.tramways.projects.mongo;
 
-import it.tramways.projects.api.model.RoadMap;
 import it.tramways.projects.mongo.model.RoadMapEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

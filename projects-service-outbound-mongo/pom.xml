@@ -9,9 +9,9 @@
       <groupId>org.springframework.boot</groupId>
     </dependency>
     <dependency>
-      <artifactId>projects-service-api</artifactId>
+      <artifactId>projects-service-outbound-api</artifactId>
       <groupId>it.tramways</groupId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 

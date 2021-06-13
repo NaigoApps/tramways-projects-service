@@ -1,9 +1,9 @@
 package it.tramways.projects.mongo;
 
 import it.tramways.projects.api.ProjectsRepository;
-import it.tramways.projects.api.model.Project;
-import it.tramways.projects.api.model.ProjectDescription;
-import it.tramways.projects.api.model.RoadMap;
+import it.tramways.projects.api.v1.spring.server.model.Project;
+import it.tramways.projects.api.v1.spring.server.model.ProjectDescription;
+import it.tramways.projects.api.v1.spring.server.model.RoadMap;
 import it.tramways.projects.mongo.model.ProjectEntity;
 import it.tramways.projects.mongo.model.RoadMapEntity;
 import java.util.List;
