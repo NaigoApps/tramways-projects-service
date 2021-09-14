@@ -1,8 +1,8 @@
 package it.tramways.projects.api;
 
-import it.tramways.projects.api.v1.spring.server.model.Project;
-import it.tramways.projects.api.v1.spring.server.model.ProjectDescription;
-import it.tramways.projects.api.v1.spring.server.model.RoadMap;
+import it.tramways.projects.api.v1.model.Project;
+import it.tramways.projects.api.v1.model.ProjectDescription;
+import it.tramways.projects.api.v1.model.RoadMap;
 import java.util.List;
 
 public interface ProjectsRepository {

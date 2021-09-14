@@ -1,7 +1,7 @@
 package it.tramways.projects.mongo.model;
 
-import it.tramways.projects.api.v1.spring.server.model.Project;
-import it.tramways.projects.api.v1.spring.server.model.ProjectDescription;
+import it.tramways.projects.api.v1.model.Project;
+import it.tramways.projects.api.v1.model.ProjectDescription;
 
 public class ProjectEntity extends Project {
 

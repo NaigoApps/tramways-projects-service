@@ -7,15 +7,15 @@
 
   <dependencies>
     <dependency>
-      <artifactId>projects-service-rest-api</artifactId>
+      <artifactId>projects-service-server-api</artifactId>
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <artifactId>projects-service-mongo</artifactId>
-      <groupId>it.tramways</groupId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <artifactId>projects-service-mongo</artifactId>-->
+<!--      <groupId>it.tramways</groupId>-->
+<!--      <version>1.0.0-SNAPSHOT</version>-->
+<!--    </dependency>-->
     <dependency>
       <artifactId>spring-boot-starter-data-rest</artifactId>
       <groupId>org.springframework.boot</groupId>
@@ -24,6 +24,12 @@
       <artifactId>tramways-commons-rest</artifactId>
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>it.tramways</groupId>
+      <artifactId>projects-service-outbound-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 

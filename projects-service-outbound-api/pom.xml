@@ -6,7 +6,7 @@
 
   <dependencies>
     <dependency>
-      <artifactId>projects-service-rest-api</artifactId>
+      <artifactId>projects-service-server-api</artifactId>
       <groupId>it.tramways</groupId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
