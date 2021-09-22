@@ -365,13 +365,8 @@ components:
           EXPONENTIAL: '#/components/schemas/ExponentialDistribution'
       properties:
         distributionType:
-          $ref: '#/components/schemas/DistributionType'
+          type: string
       required: [ distributionType ]
-    DistributionType:
-      type: string
-      enum:
-        - UNIFORM
-        - EXPONENTIAL
     UniformDistribution:
       allOf:
         - $ref: '#/components/schemas/Distribution'

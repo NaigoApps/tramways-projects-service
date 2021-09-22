@@ -29,7 +29,7 @@ import java.io.IOException;
 /**
  * IntegerProperty
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-05-09T23:32:03.721+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-09-15T22:49:26.797120+02:00[Europe/Rome]")
 public class IntegerProperty extends Property {
   public static final String SERIALIZED_NAME_VALUE = "value";
   @SerializedName(SERIALIZED_NAME_VALUE)

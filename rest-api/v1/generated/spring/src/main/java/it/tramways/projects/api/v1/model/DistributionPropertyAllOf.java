@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 /**
  * DistributionPropertyAllOf
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-09T23:31:59.430+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-15T22:49:23.374197+02:00[Europe/Rome]")
 public class DistributionPropertyAllOf   {
   @JsonProperty("value")
   private Distribution value;
