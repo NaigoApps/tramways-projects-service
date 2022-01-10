@@ -1,0 +1,5 @@
+/projects-service-outbound-api/target/
+/projects-service-application/target/
+/projects-service-outbound-mongo/target/
+/projects-service-inbound-rest/target/
+/rest-api/v1/generated/spring/target/
