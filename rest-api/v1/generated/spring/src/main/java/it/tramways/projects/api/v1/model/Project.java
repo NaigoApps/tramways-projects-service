@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
 /**
  * Project
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-15T22:49:23.374197+02:00[Europe/Rome]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-14T00:55:55.334+01:00[Europe/Berlin]")
 public class Project   {
   @JsonProperty("uuid")
   private String uuid;

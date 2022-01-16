@@ -12,8 +12,7 @@ openapi-generator-cli generate \
 --api-package it.tramways.projects.api."$1" \
 --model-package it.tramways.projects.api."$1".model \
 --group-id it.tramways \
---artifact-id projects-service-server-api \
---artifact-version="$2"
+--artifact-id projects-service-server-api
 
 openapi-generator-cli generate \
 -g java \
@@ -22,8 +21,7 @@ openapi-generator-cli generate \
 --api-package it.tramways.projects.api."$1" \
 --model-package it.tramways.projects.api."$1".model \
 --group-id it.tramways \
---artifact-id projects-service-client-api \
---artifact-version="$2"
+--artifact-id projects-service-client-api
 
 openapi-generator-cli generate \
 -g typescript-axios \
@@ -31,5 +29,4 @@ openapi-generator-cli generate \
 -i ./"$1"/projects-api.yaml \
 -o ./"$1"/generated/javascript \
 --api-package it.tramways.projects.api."$1" \
---model-package it.tramways.projects.api."$1".model \
---artifact-version="$2"
+--model-package it.tramways.projects.api."$1".model

@@ -14,11 +14,11 @@ import javax.validation.constraints.*;
 /**
  * Distribution
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-15T22:49:23.374197+02:00[Europe/Rome]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-14T00:55:55.334+01:00[Europe/Berlin]")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "distributionType", visible = true)
 @JsonSubTypes({
-  @JsonSubTypes.Type(value = ExponentialDistribution.class, name = "EXPONENTIAL"),
-  @JsonSubTypes.Type(value = UniformDistribution.class, name = "UNIFORM"),
+  @JsonSubTypes.Type(value = ExponentialDistribution.class, name = "ExponentialDistribution"),
+  @JsonSubTypes.Type(value = UniformDistribution.class, name = "UniformDistribution"),
 })
 
 public class Distribution   {

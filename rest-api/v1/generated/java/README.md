@@ -1,8 +1,8 @@
 # projects-service-client-api
 
 Tramways Roadmaps API
-- API version: 1.0.0
-  - Build date: 2021-09-15T22:49:26.797120+02:00[Europe/Rome]
+- API version: 1.0.2
+  - Build date: 2022-01-14T00:56:01.025+01:00[Europe/Berlin]
 
 Tramways Roadmaps API
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>it.tramways</groupId>
   <artifactId>projects-service-client-api</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "it.tramways:projects-service-client-api:1.0.0-SNAPSHOT"
+compile "it.tramways:projects-service-client-api:1.0.2"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/projects-service-client-api-1.0.0-SNAPSHOT.jar`
+* `target/projects-service-client-api-1.0.2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

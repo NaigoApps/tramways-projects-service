@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Tramways Roadmaps API
   description: Tramways Roadmaps API
-  version: 1.0.0
+  version: 1.0.2
 servers:
   - url: http://localhost:8762/tramways/rest/
 paths:
@@ -360,9 +360,6 @@ components:
       type: object
       discriminator:
         propertyName: distributionType
-        mapping:
-          UNIFORM: '#/components/schemas/UniformDistribution'
-          EXPONENTIAL: '#/components/schemas/ExponentialDistribution'
       properties:
         distributionType:
           type: string

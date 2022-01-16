@@ -1,6 +1,6 @@
 {
   "name": "@tramways/projects-service-api",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "OpenAPI client for @tramways/projects-service-api",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [

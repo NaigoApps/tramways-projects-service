@@ -3,7 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 
 group = 'it.tramways'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.2'
 
 buildscript {
     repositories {
